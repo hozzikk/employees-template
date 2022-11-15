@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import './employees-list-item.css';
 
-const EmployeesListItem = () => {
+const EmployeesListItem = ({name, salary}) => {
+    const [increase, setIncrease] = useState(false)
+
+    const isIncrease = () => {
+        setIncrease(() => !increase)
+    }
+
     return (
-        <li className="list-group-item d-flex justify-content-between">
-            <span className="list-group-item-label">John Smith</span>
-            <input type="text" className="list-group-item-input" defaultValue="1000$"/>
+        <li className={increase ? 'list-group-item d-flex justify-content-between increase' : "list-group-item d-flex justify-content-between"}>
+            <span className="list-group-item-label">{name}</span>
+            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
+                    onClick={isIncrease}
                     className="btn-cookie btn-sm ">
                     <i className="fas fa-cookie"></i>
                 </button>
