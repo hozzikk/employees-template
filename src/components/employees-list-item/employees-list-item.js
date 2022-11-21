@@ -1,48 +1,25 @@
-import { Component } from 'react';
 import './employees-list-item.css';
 
-class EmployeesListItem extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            increase: false,
-            raising: false,
-        }
+const EmployeesListItem = (props) => {
+    const {name, salary, deleteItem, onToggleProp, increase, raising} = props
+    let classNames = 'list-group-item d-flex justify-content-between';
+    if (increase) {
+        classNames += ' increase'
     }
-
-    onIncrease = () => {
-        this.setState(({increase}) => ({
-            increase: !increase
-        }))
+    if(raising){
+        classNames += ' like'
     }
-
-    onRaising = () => {
-        this.setState(({raising}) => ({
-            raising: !raising
-        }))
-    }
-
-    render() {
-        const {name, salary, deleteItem} = this.props
-        const {increase, raising} = this.state
-        let classNames = 'list-group-item d-flex justify-content-between';
-        if (increase) {
-            classNames += ' increase'
-        }
-        if(raising){
-            classNames += ' like'
-        }
     return (
         <li className={classNames}>
             <span 
-            className='list-group-item-label like'
-            onClick={this.onRaising}>{name}</span>
+                className='list-group-item-label like'
+                onClick={onToggleProp} data-toggle='raising'>{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
-                    onClick={this.onIncrease}
-                    className="btn-cookie btn-sm ">
+                    onClick={onToggleProp}
+                    className="btn-cookie btn-sm "
+                    data-toggle='increase'>
                     <i className="fas fa-cookie"></i>
                 </button>
 
@@ -55,7 +32,6 @@ class EmployeesListItem extends Component {
             </div>
         </li>
     )
-    }
 }
 
 export default EmployeesListItem;
