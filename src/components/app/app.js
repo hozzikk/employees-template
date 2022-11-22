@@ -101,8 +101,8 @@ class App extends Component {
       case 'rise':
         return items.filter(item => item.raising)
       case 'moreThen1000':
-        return items.filter(item => item.salary > 1000)
-      default: 
+        return items.filter(item => item.raising)
+      default:
         return items
     }
   }
